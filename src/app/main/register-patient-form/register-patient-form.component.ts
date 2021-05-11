@@ -29,50 +29,31 @@ export class RegisterPatientFormComponent implements OnInit {
     this.newPatientRecordForm = this.fb.group({
       patientRegistrationNumber: ['',Validators.required],
       firstName: ['', Validators.required],
-      middleName: [''],
-      surname: ['', Validators.required],
+      lastName: ['', Validators.required],
       gender: ['', Validators.required],
-      dateOfBirth: this.fb.group({
-          year: ['', Validators.required],
-          month: ['', Validators.required],
-          day : ['', Validators.required]
-      }),
-      mainPhoneNumber: ['', Validators.required],
-      alternativePhoneNumber: [''],
-      email: [''],
-      county: ['', Validators.required],
-      subCounty: [''],
-      estateOrArea: ['', Validators.required]
+      dateOfBirth: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      residence: ['', Validators.required]
     });
   }
 
   onSubmit() {
     this.patientRecordFormSubmitted = true;
     if (this.newPatientRecordForm.valid) {
-      this.spinner.show();
       this.patient = this.newPatientRecordForm.value;
       this.patient.firstName = this.capitalizeFirstLetter(this.firstName.value);
-      this.patient.middleName = this.capitalizeFirstLetter(this.middleName.value);
-      this.patient.surname = this.capitalizeFirstLetter(this.surname.value);
+      this.patient.lastName = this.capitalizeFirstLetter(this.lastName.value);
       this.patient.gender = this.capitalizeFirstLetter(this.gender.value);
-      this.patient.county = this.capitalizeFirstLetter(this.county.value);
-      this.patient.subCounty = this.capitalizeFirstLetter(this.subCounty.value);
-      this.patient.estateOrArea = this.capitalizeFirstLetter(this.estateOrArea.value);
-      this.patient.mainPhoneNumber = this.mainPhoneNumber.value.trim().replace(/\s+/g, '');
-      this.patient.alternativePhoneNumber = this.alternativePhoneNumber.value.trim().replace(/\s+/g, '');
-      this.patient['dob'] = this.getJavascriptDate();
+      this.patient.residence = this.capitalizeFirstLetter(this.residence.value);
+      this.patient.phoneNumber = this.phoneNumber.value.trim().replace(/\s+/g, '');
+      this.patient.dateOfBirth = new Date(this.newPatientRecordForm.value['dateOfBirth']).toUTCString();
 
       this.apiservice.checkIfPatientExists(this.patient).subscribe(results => {
         if (results.length === 0) {
 
           this.apiservice.registerNewPatientToDatabase(this.patient).subscribe(results => {
             this.spinner.hide();
-            this.router.navigate(['../patient-details'], {
-              queryParams: {
-                id: results.id
-              },
-              relativeTo: this.route
-            });
+            this.patientDetails(results);
           }, error => {
             this.spinner.hide();
             console.error(error);
@@ -95,10 +76,10 @@ export class RegisterPatientFormComponent implements OnInit {
     return dataString.charAt(0).toUpperCase() + dataString.slice(1);
   }
 
-  goToDetails(patient: Patient) {
+  patientDetails( patient: Patient ) {
     this.router.navigate(['../patient-details'], {
       queryParams: {
-        id: patient.id
+        patientID: patient.id
       },
       relativeTo: this.route
     });
@@ -109,39 +90,14 @@ export class RegisterPatientFormComponent implements OnInit {
     this.patientExists = false;
   }
 
-  getJavascriptDate() {
-    const dateOfBirthString = `${this.dayOfBirth.value} ${this.monthOfBirth.value} ${this.yearOfBirth.value}`;
-    const dateOfBirth = new Date(dateOfBirthString);
-    return dateOfBirth.toUTCString();
-  }
-
-  yearsArray() {
-    const startYear = 1920;
-    const currentYear = new Date().getFullYear();
-    const years = [];
-    for(let i=startYear; i<=currentYear; i++){
-      years.push(i);
-    }
-    return years;
-  }
-
-  get surname() { return this.newPatientRecordForm.get('surname'); }
-  get firstName() { return this.newPatientRecordForm.get('firstName'); }
-  get middleName() { return this.newPatientRecordForm.get('middleName'); }
   get patientRegistrationNumber() { return this.newPatientRecordForm.get('patientRegistrationNumber'); }
+  get firstName() { return this.newPatientRecordForm.get('firstName'); }
+  get lastName() { return this.newPatientRecordForm.get('lastName'); }
   get gender() { return this.newPatientRecordForm.get('gender'); }
   get age() { return this.newPatientRecordForm.get('age'); }
-  get mainPhoneNumber() { return this.newPatientRecordForm.get('mainPhoneNumber'); }
-  get alternativePhoneNumber() { return this.newPatientRecordForm.get('alternativePhoneNumber'); }
-  get email() { return this.newPatientRecordForm.get('email'); }
-  get county() { return this.newPatientRecordForm.get('county'); }
-  get subCounty() { return this.newPatientRecordForm.get('subCounty'); }
-  get estateOrArea() { return this.newPatientRecordForm.get('estateOrArea'); }
-  get jobTitle() { return this.newPatientRecordForm.get('jobTitle'); }
+  get phoneNumber() { return this.newPatientRecordForm.get('phoneNumber'); }
+  get residence() { return this.newPatientRecordForm.get('residence'); }
   get dateOfBirth() { return this.newPatientRecordForm.get('dateOfBirth'); }
-  get yearOfBirth() { return this.newPatientRecordForm.get('dateOfBirth').get('year'); }
-  get monthOfBirth() { return this.newPatientRecordForm.get('dateOfBirth').get('month'); }
-  get dayOfBirth() { return this.newPatientRecordForm.get('dateOfBirth').get('day'); }
 
   counties = ['BARINGO','BOMET','BUNGOMA','BUSIA','ELGEYO-MARAKWET','EMBU','GARISSA','HOMA-BAY','ISIOLO','KAJIADO','KAKAMEGA','KERICHO','KIAMBU',
     'KILIFI','KIRINYAGA','KISII','KISUMU','KITUI','KWALE','LAIKIPIA','LAMU','MACHAKOS','MAKUENI','MANDERA','MARSABIT','MERU','MIGORI','MOMBASA',

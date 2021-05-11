@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-12">
+        <app-patient-information [patient]="patient"></app-patient-information>
+    </div>
+    <div class="col-lg-9">
+        <router-outlet></router-outlet>
+         <button class="btn btn-info btn-back" (click)="navToPatientDetails()" style="margin-top: 10px;"><i class="fas fa-arrow-left"></i>BACK</button>
+    </div>
+    <div class="col-lg-3">
+        <div class="sidebar-wrapper">
+            <div class="sidebar-menu">
+                <ul>
+    
+                    <!-- <li class="header-menu">
+                        <span>Dashboard</span>
+                    </li> -->
+    
+                    <li>
+                        <a routerLink="../session-data/complaints" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Complaints</span>
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a routerLink="../session-data/physical-exam" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Physical Examination</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/comorbidities" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Comorbidities</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/investigations" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Investigations</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/diagnosis" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Diagnosis</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/treatment" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Treatment</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/vitals" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Vitals</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/payments" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Charges</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/session-summary" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Summary</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

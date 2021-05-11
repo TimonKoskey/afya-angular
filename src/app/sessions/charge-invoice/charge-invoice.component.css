@@ -1,0 +1,18 @@
+/* body {
+    background: grey;
+    margin-top: 120px;
+    margin-bottom: 120px;
+} */
+
+.btn.btn-default.btn-print-action {
+    float: right;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    background-color: #adb5bd;
+}
+
+.btn.btn-default.btn-print-action:hover {
+    background-color: white;
+}
+
+

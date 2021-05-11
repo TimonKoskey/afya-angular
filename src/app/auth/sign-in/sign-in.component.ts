@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { APIService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,7 @@ export class SignInComponent implements OnInit {
   password: string;
   logFormSubmitted = false;
   loginError: string;
-  user: User;
+  user: any;
   fetchDataError: HttpErrorResponse;
   logStateConfirmedFalse = false;
   loginForm: NgForm;
@@ -24,7 +25,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private router: Router,
     private spinner: NgxSpinnerService,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private apiservice: APIService
   ) { }
 
   ngOnInit() {}
@@ -39,7 +41,13 @@ export class SignInComponent implements OnInit {
         this.spinner.hide();
         const token = results['token'];
         this.authservice.saveToken(token);
-        this.router.navigate(['/account']);
+        this.authservice.getUserData().subscribe(results => {
+          this.user = results;
+          this.apiservice.setUser(this.user);
+          this.router.navigate(['/account']);
+        }, error => {
+          console.error(error);
+        });
       }, error => {
         this.spinner.hide();
         this.fetchDataError = error;

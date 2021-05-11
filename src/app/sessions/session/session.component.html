@@ -1,0 +1,249 @@
+<div class="container-fluid">
+    <ngx-spinner></ngx-spinner>
+    <div id="summary-section">
+        <div class="row">
+            <div class="col-12">
+                <div id="session-status-bar">
+                    <span>Active Visit - 14.Mar.2021, 20:36:38</span>
+                </div>
+            </div>
+            <div class="col-12">
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-xl-6">
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Investigations</span>
+                                <span class="sec-header-action" *ngIf="session"
+                                    (click)="navToInvestigationsPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section"
+                                *ngIf="session && session?.investigations?.length > 0; else noneTemplate">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="table-info">
+                                            <tr>
+                                                <th>Test</th>
+                                                <th>Results</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let investigation of session?.investigations; let i = index">
+                                                <td>{{investigation.test}}</td>
+                                                <td>{{investigation.results}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Vitals</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToVitalsPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section" *ngIf="session && session?.vitals?.length > 0; else noneTemplate">
+                                <div *ngFor="let vitalsItem of session.vitals">
+                                    <table class="table table-striped custab">
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">Systolic B.P</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.systolic}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">Diastolic B.P</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.diastolic}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">Pulse</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.pulseRate}} /min</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">Temperature</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.temperature}} celsius</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">SPO2</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.SPO2}}%</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="vitals-item">
+                                                <span class="label">Weight</span>
+                                            </td>
+                                            <td class="vitals-item">
+                                                <span class="value">{{vitalsItem.weight}} KGS</span>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Charges</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToPaymentsPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="table-info">
+                                        <tr>
+                                            <th>Concept</th>
+                                            <th>Amount (Ksh)</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let payment of session?.payments; let i = index">
+                                            <td>{{payment.concept}}</td>
+                                            <td>{{payment.amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-xl-6">
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Complaints</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToComplaintsPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section"
+                                *ngIf="session && session?.complaints.length > 0; else noneTemplate">
+
+                                <ul class="no-bullets">
+                                    <li *ngFor="let note of session.complaints">
+                                        <div class="notes-item">
+                                            <span><i>{{note.entry}}</i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Physical Examination</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToPhysicalExamsPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section"
+                                *ngIf="session && session?.physicalExams.length > 0; else noneTemplate">
+
+                                <ul class="no-bullets">
+                                    <li *ngFor="let note of session.physicalExams">
+                                        <div class="notes-item">
+                                            <span><i>{{note.entry}}</i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Comorbidities</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToComorbiditiesPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section"
+                                *ngIf="session && session?.comorbidities.length > 0; else noneTemplate">
+
+                                <ul class="no-bullets">
+                                    <li *ngFor="let note of session.comorbidities">
+                                        <div class="notes-item">
+                                            <span><i>{{note.entry}}</i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Diagnosis</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToDiagnosisPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section" *ngIf="session && session?.diagnosis.length > 0; else noneTemplate">
+
+                                <ul class="no-bullets">
+                                    <li *ngFor="let note of session.diagnosis">
+                                        <div class="notes-item">
+                                            <span><i>{{note.entry}}</i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="sec-header">
+                                <span class="sec-title">Treatment</span>
+                                <span class="sec-header-action" *ngIf="session" (click)="navToTreatmentPage()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</span>
+                            </div>
+                            <div id="notes-section" *ngIf="session && session?.treatment.length > 0; else noneTemplate">
+
+                                <ul class="no-bullets">
+                                    <li *ngFor="let note of session.treatment">
+                                        <div class="notes-item">
+                                            <span><i>{{note.entry}}</i></span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <ng-template #noneTemplate>
+                            <p>None</p>
+                        </ng-template>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

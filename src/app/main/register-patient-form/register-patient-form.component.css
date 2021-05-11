@@ -6,3 +6,17 @@
 .data-exists-error-title {
     color: red;
 }
+
+.bmd-label-floating.label {
+    margin-right: 20px;
+}
+
+.form-group.has-success.bmd-form-group .data-input{
+    min-width: 300px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee;
+    text-transform: capitalize;
+}

@@ -1,0 +1,47 @@
+<div id="main-container-component">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="sidebar-nav">
+                    <ul class="no-bullets">
+                        <li class="nav-item" routerLink="/account/home" routerLinkActive="active">
+                            <i class="fa fa-home"></i>
+                            <span>Home</span>
+                        </li>
+                        <li class="nav-item" routerLink="/account/patients/list" routerLinkActive="active">
+                            <i class="fa fa-book"></i>
+                            <span>Patient Records</span>
+                        </li>
+                        <li class="nav-item" routerLink="/account/register-patient" routerLinkActive="active">
+                            <i class="fa fa-user-plus"></i>
+                            <span>Register Patient</span>
+                        </li>
+                        <li class="nav-item" routerLink="/account/active-sessions" routerLinkActive="active">
+                            <i class="fa fa-user-circle"></i>
+                            <span>Active Sessions</span>
+                        </li>
+                        <!-- <li class="nav-item" routerLink="/account/follow-up-sessions" routerLinkActive="active">
+                            <i class="fa fa-calendar"></i>
+                            <span>Follow Up Sessions</span>
+                        </li>
+                        <li class="nav-item" routerLink="/account/lab-results" routerLinkActive="active">
+                            <i class="fa fa-flask"></i>
+                            <span>Investigation Results</span>
+                        </li> -->
+                        <li class="nav-item" routerLink="/account/retrieve-session" routerLinkActive="active">
+                            <i class="fa fa-archive"></i>
+                            <span>Retrieve Session</span>
+                        </li>
+                        <li class="nav-item" routerLink="/account/cash-report" routerLinkActive="active">
+                            <i class="fa fa-file"></i>
+                            <span>Cash Report</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container"> -->
     <div class="patient-records">
         <ngx-spinner></ngx-spinner>
         <div class="card">
@@ -29,7 +29,6 @@
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
-                                        <!-- <th>Reg Number</th> -->
                                         <th>Gender</th>
                                         <th>Age</th>
                                         <th>Reg No</th>
@@ -38,10 +37,9 @@
                                 <tbody>
                                     <tr class="table-entry-clickable"
                                         *ngFor="let patient of paginatedPatientList; let i = index"
-                                        (click)="goToDetails(patient)">
+                                        (click)="getPatientDetails(patient)">
                                         <td>{{getItemCount(i)}}</td>
-                                        <td>{{patient.firstName}} {{patient.middleName}} {{patient.surname}}</td>
-                                        <!-- <td>{{patient.id}}</td> -->
+                                        <td>{{patient.firstName}} {{patient.lastName}}</td>
                                         <td>{{patient.gender}}</td>
                                         <td>{{patient.age}}</td>
                                         <td>{{patient.patientRegistrationNumber}}</td>
@@ -60,4 +58,4 @@
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->

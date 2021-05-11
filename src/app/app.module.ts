@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './main/main.module';
+import { AdminModule } from './admin/admin.module'
 
 import { httpInterceptorProviders } from './services/interceptors/index';
 
@@ -28,7 +29,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     NgxSpinnerModule,
     PersistenceModule,
     HttpClientModule,
-    MainModule
+    MainModule,
+    AdminModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

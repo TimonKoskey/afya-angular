@@ -1,0 +1,28 @@
+<div id="patient-information">
+    <div class="row">
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <p><span class="data-value">{{patient?.firstName}} {{patient?.lastName}}</span></p>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <p><span class="data-value">{{patient?.gender}} <span
+                                class="data-value">{{patient?.age}}</span></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="patient-id-section" class="col-md-6 col-sm-6 col-xs-12">
+            <p><span class="data-label"><i>Patient ID:</i></span><span
+                    class="data-value">{{patient?.patientRegistrationNumber}}</span></p>
+        </div>
+
+        <div class="col-12">
+            <div id="edit-patient-details-section">
+                <a id="edit-patient-details-link" (click)="navToPatientDetails()">More Details</a> 
+            </div>
+        </div>
+
+
+    </div>
+</div>

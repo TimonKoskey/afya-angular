@@ -1,0 +1,11 @@
+.btn-add-user {
+  margin-bottom: 15px;
+}
+
+.btn-group .dropdown-item {
+  cursor: pointer;
+}
+
+.btn-group .dropdown-item.delete {
+  color: red;
+}

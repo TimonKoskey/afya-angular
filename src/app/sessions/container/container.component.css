@@ -1,0 +1,12 @@
+#session-page-main-section-top {
+    border-bottom: 2px solid #0831430a;
+    margin-bottom: 15px;
+}
+
+#edit-patient-details-section #edit-patient-details-link {
+    padding: 3px 10px;
+    color: whitesmoke;
+    background-color: blue;
+    cursor: pointer;
+    border-radius: 5px;
+}

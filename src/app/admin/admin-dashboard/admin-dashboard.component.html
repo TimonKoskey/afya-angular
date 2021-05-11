@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn btn-secondary btn-add-user" (click)="navToAddNewUser()"><i class="fa fa-plus" aria-hidden="true"></i>Add User</button>
+            <div class="row" *ngIf="recordsAvailable">
+                <div class="col-lg-4 col-md-6" *ngFor="let user of users; let i = index">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="btn-group" style="float: right;">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Actions
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" (click)="blockUser(user)" *ngIf="user.is_active">Block User</a>
+                                  <a class="dropdown-item" (click)="unblockUser(user)" *ngIf="!user.is_active">Unblock User</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item delete" (click)="deleteUser(user,i)">Delete User</a>
+                                </div>
+                              </div>
+                            <div class="table-responsive">
+                                <table class="table table-user-information">
+                                    <tbody>
+    
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>{{user?.first_name}} {{user?.last_name}}</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Username:</td>
+                                            <td>{{user?.username}}</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{user?.email}}</td>
+                                        </tr>
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

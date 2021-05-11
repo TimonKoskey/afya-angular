@@ -1,0 +1,155 @@
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+span.badge {
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+#session-page-main-section {
+    padding-top: 20px;
+}
+
+#session-status-bar {
+    padding-top: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+#session-status-bar span{
+    margin-left: 20px;
+}
+
+#right-sidebar-view {
+    padding: 20px 15px;
+    border-left: 2px solid #e9ecef;
+    min-height: 94vh;
+}
+
+#session-history {
+    margin-top: 10px;
+}
+
+.section-title {
+    font-weight: bold;
+    color: #0e2842;
+    border-bottom: 3px solid #6585a5;
+    text-transform: uppercase;
+}
+
+#patient-id-section.col-md-6.col-sm-6 p{
+    float: right;
+}
+
+#right-sidebar-view p {
+    margin-bottom: 0.4rem
+}
+
+.data-label {
+    color: #00463f;
+}
+
+.data-value {
+    margin-left: 10px;
+    color: #363463;
+}
+
+#main-page-action-bar {
+    padding: 10px 5px;
+    background-color: #185d5d;
+    color: whitesmoke;
+}
+
+.main-page-action-bar-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1.0em;
+    border-bottom: 1px solid;
+}
+
+#main-page-action-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-page-action-list .main-page-action-list-item {
+    font-weight: 100;
+    font-size: 0.9em;
+    width: 100%;
+    cursor: pointer;
+    padding: 2px 10px;
+    background-color: #0f3c3c;
+    margin: 2px 0px;
+    /* border: 1px solid whitesmoke; */
+}
+
+.section {
+    margin: 10px 0px;
+}
+
+.sec-header {
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
+}
+
+.no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sec-header .sec-title{
+    font-size: 1.2em;
+}
+
+.no-bullets .notes-item {
+    margin-left: 10px;
+    font-size: .9em;
+}
+
+.sec-header-action {
+    float: right;
+    padding: 0px 10px;
+    cursor: pointer;
+    background-color: green;
+    color: whitesmoke;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.sec-header-action i {
+    margin-right: 3px;
+}
+
+.single ul {
+    margin-bottom: 0; 
+}
+
+.single li a {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 40px;
+    display: block;
+    text-decoration: none;
+}
+
+.single li a:hover {
+    color: #ff173c; 
+}
+
+.single li:last-child a {
+    border-bottom: 0; 
+}
+
+.custab .vitals-item {
+    padding: 0px 0px;
+}
+
+.table td, .table th {
+    padding: .3rem;
+    font-size: .9em;
+}

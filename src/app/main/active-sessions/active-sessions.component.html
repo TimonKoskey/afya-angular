@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="active-sessions">
         <ngx-spinner></ngx-spinner>
         <div class="card">
@@ -34,9 +34,9 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let session of paginatedSessionList; let i = index" class="session-entry"
-                                        (click)="navToSessionDetails(session)">
+                                        (click)="navToSessionSumarry(session)">
                                         <td>{{getItemCount(i)}}</td>
-                                        <td>{{session.patient.firstName}} {{session.patient.middleName}} {{session.patient.surname}}</td>
+                                        <td>{{session.patient.firstName}} {{session.patient.lastName}}</td>
                                         <td>{{session.patient?.patientRegistrationNumber}}</td>
                                         <td>{{session.date | date: 'dd/MM/yyyy'}}</td>
                                         <td>{{session.status}}</td>

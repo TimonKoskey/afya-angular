@@ -26,14 +26,6 @@ export class TokenInterceptor implements HttpInterceptor {
           return throwError(error);
         })
       )
-      //   map((event: HttpEvent<any>) => {
-      //     if (event instanceof HttpErrorResponse) {
-      //       console.log('event--->>>', event.status);
-      //       // this.auth.removeDataFromSessionStorage();
-      //       // this.router.navigate(['sign-in']);
-      //     }
-      //     return event;
-      // }))
     }
 
     createHeaders(token?: string) {
@@ -49,12 +41,4 @@ export class TokenInterceptor implements HttpInterceptor {
         return httpOptions;
     }
 
-    // private handleError(error: HttpErrorResponse) {
-    //   console.log(error.status)
-    //   if (error.status === 401) {
-    //     this.auth.removeDataFromSessionStorage();
-    //     this.router.navigate(['sign-in']);
-    //   }
-    //   return throwError(error);
-    // }
 }

@@ -52,14 +52,13 @@ export class PatientRecordsComponent implements OnInit, OnDestroy {
       const searchTermLower = searchTerm.toLowerCase();
       const newPatientsList = [];
       for (const patient of this.mainPatientsList) {
-        const mainPhoneNumber = patient.mainPhoneNumber;
+        const phoneNumber = patient.phoneNumber;
         const regNo = patient.patientRegistrationNumber;
         const firstName = patient.firstName.toLowerCase();
-        const middleName = patient.middleName.toLowerCase();
-        const surname = patient.surname.toLowerCase();
+        const lastName = patient.lastName.toLowerCase();
 
-        if (surname.includes(searchTermLower)  || firstName.includes(searchTermLower) ||  middleName.includes(searchTermLower) ||
-          mainPhoneNumber.includes(searchTermLower) || regNo.includes(searchTermLower)) {
+        if (firstName.includes(searchTermLower) ||  lastName.includes(searchTermLower) || phoneNumber.includes(searchTermLower) 
+          || regNo.includes(searchTermLower)) {
             newPatientsList.push(patient);
         }
       }
@@ -86,10 +85,10 @@ export class PatientRecordsComponent implements OnInit, OnDestroy {
     return itemCount;
   }
 
-  goToDetails(patient: Patient) {
-    this.router.navigate(['../patient-details'], {
+  getPatientDetails( patient: Patient ) {
+    this.router.navigate(['../../patient-details'], {
       queryParams: {
-        id: patient.id
+        patientID: patient.id
       },
       relativeTo: this.route
     });

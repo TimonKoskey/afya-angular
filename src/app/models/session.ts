@@ -6,19 +6,19 @@ import { Investigations } from './investigation';
 
 export interface Session {
     id?: number;
-    patient?: Patient
     date?: string;
     status?: string;
+    patient: Patient;
 
     payments?: Array<Payment>;
-    vitals?: Vitals;
-    complaints?: Notes;
-    physicalExams?: Notes;
-    comorbidities?: Notes;
-    investigations?: Investigations;
-    diagnosis?: Notes;
-    treatment?: Notes;
-    remarks?: Notes;
+    vitals?: Array<Vitals>;
+    complaints?: Array<Notes>;
+    physicalExams?: Array<Notes>;
+    comorbidities?: Array<Notes>;
+    investigations?: Array<Investigations>;
+    diagnosis?: Array<Notes>;
+    treatment?: Array<Notes>;
+    remarks?: Array<Notes>;
 
     followUpDate?: Date;
     followUpStatus?: string;

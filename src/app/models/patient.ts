@@ -1,20 +1,18 @@
+import { Session } from "./session";
+
 export interface Patient {
     id?: number;
     patientRegistrationNumber?: string;
     firstName?: string;
-    middleName?: string;
-    surname?: string;
+    lastName?: string;
     gender?: string;
-    dateOfBirth?: Date;
+    dateOfBirth?: any;
     age?: string;
-    mainPhoneNumber?: string;
-    alternativePhoneNumber?: string;
-    email?: string;
-    county?: string;
-    subCounty?: string;
-    estateOrArea?: string;
+    phoneNumber?: string;
+    residence?: string;
     registrationDate?: Date;
     lastUpdated?: Date;
+    visits?: Array<Session>
 }
 
 

@@ -56,10 +56,8 @@ export class LabResultsListComponent implements OnInit {
       for (const session of this.mainSessionsList) {
         const regNo = session.patient.patientRegistrationNumber;
         const firstName = session.patient.firstName.toLowerCase();
-        const middleName = session.patient.middleName.toLowerCase();
-        const surname = session.patient.surname.toLowerCase();
-        if (surname.includes(searchTermLower)  ||
-            firstName.includes(searchTermLower) || middleName.includes(searchTermLower) || regNo.includes(searchTermLower)) {
+        const lastName = session.patient.lastName.toLowerCase();
+        if (firstName.includes(searchTermLower) || lastName.includes(searchTermLower) || regNo.includes(searchTermLower)) {
               newSessionList.push(session);
         }
       }

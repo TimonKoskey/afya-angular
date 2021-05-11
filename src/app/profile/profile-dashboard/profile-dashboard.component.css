@@ -1,0 +1,14 @@
+.img-circle.img-responsive {
+    width: 200px;
+    height: 200px;
+}
+
+.panel.panel-default {
+    padding: 50px 50px;
+}
+
+.password-input {
+    min-width: 300px;
+    line-height: 1.5;
+    height: calc(1.5em + .75rem + 2px);
+}

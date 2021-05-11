@@ -5,9 +5,12 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgbModalModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import {NgxPrintModule} from 'ngx-print';
 
 import { MainRoutingModule } from './main-routing.module';
-import { SessionModule } from '../session/session.module';
+import { SharedModule } from '../shared/shared.module';
+import { SessionsModule } from '../sessions/sessions.module';
+import { ProfileModule } from '../profile/profile.module';
 
 import { APIService } from '../services/api/api.service';
 
@@ -21,6 +24,9 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { RetrieveSessionComponent } from './retrieve-session/retrieve-session.component';
 import { CashReportComponent } from './cash-report/cash-report.component';
 import { LabResultsListComponent } from './lab-results-list/lab-results-list.component';
+import { MainContainerComponent } from './main-container/main-container.component';
+import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
+
 
 @NgModule({
 
@@ -34,7 +40,9 @@ import { LabResultsListComponent } from './lab-results-list/lab-results-list.com
     FollowUpComponent,
     RetrieveSessionComponent,
     CashReportComponent,
-    LabResultsListComponent
+    LabResultsListComponent,
+    MainContainerComponent,
+    EditPatientDetailsComponent,
   ],
 
   imports: [
@@ -47,7 +55,10 @@ import { LabResultsListComponent } from './lab-results-list/lab-results-list.com
     NgbDatepickerModule,
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
-    SessionModule
+    SessionsModule,
+    SharedModule,
+    ProfileModule,
+    NgxPrintModule
   ],
 
   providers: [ APIService ]

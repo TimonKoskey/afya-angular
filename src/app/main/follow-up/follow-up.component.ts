@@ -43,10 +43,8 @@ export class FollowUpComponent implements OnInit {
       const newSessionList = [];
       for (const session of this.mainSessionsList) {
         const firstName = session.patient.firstName.toLowerCase();
-        const middleName = session.patient.middleName.toLowerCase();
-        const surname = session.patient.surname.toLowerCase();
-        if (surname.includes(searchTermLower)  ||
-            firstName.includes(searchTermLower) || middleName.includes(searchTermLower)) {
+        const lastName = session.patient.lastName.toLowerCase();
+        if (firstName.includes(searchTermLower) || lastName.includes(searchTermLower)) {
               newSessionList.push(session);
         }
       }

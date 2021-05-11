@@ -24,12 +24,20 @@ export class APIService {
 
   constructor(
     private http: HttpClient,
-    private persistence: PersistenceService,
+    private persistence: PersistenceService
   ) {
     if(isDevMode()) {
       this.patientUrl = `http://127.0.0.1:8000/patients`;
       this.sessionUrl = `http://127.0.0.1:8000/visits`;
     }
+  }
+
+  setSessionsToLS(sessions: Array<Session>) {
+    this.persistence.set('sessions', sessions, { type: StorageType.SESSION });
+  }
+
+  getSessionsFromLS() {
+    return this.persistence.get('sessions', StorageType.SESSION);
   }
 
   setSession$(session: Session) {
@@ -40,7 +48,7 @@ export class APIService {
     return this.session$;
   }
 
-  setUser(user: User) {
+  setUser(user: any) {
     this.persistence.set('user', user, { type: StorageType.SESSION });
   }
 
@@ -72,8 +80,16 @@ export class APIService {
     return this.http.get<Array<Patient>>(`${this.patientUrl}/list`);
   }
 
-  getPatientDetails(patientID: number): Observable<Patient> {
-    return this.http.get<Patient>(`${this.patientUrl}/patient/details/${patientID}`);
+  getPatientDetailsSummary(patientID: number): Observable<Session> {
+    return this.http.get<Session>(`${this.sessionUrl}/patient/${patientID}`);
+  }
+
+  setPatientDetailsToLS(patient: Patient) {
+    this.persistence.set('patient', patient, { type: StorageType.SESSION });
+  }
+
+  getPatientDetailsFromLS() {
+    return this.persistence.get('patient', StorageType.SESSION);
   }
 
   updatePatientDetails(patient: Patient): Observable<Patient> {
@@ -89,7 +105,7 @@ export class APIService {
   }
 
   startNewSession(patientID: number): Observable<Session> {
-    return this.http.get(`${this.sessionUrl}/create/${patientID}`);
+    return this.http.get<Session>(`${this.sessionUrl}/create/${patientID}`);
   }
 
   getActiveSessions(): Observable<Array<Session>> {
@@ -104,8 +120,8 @@ export class APIService {
     return this.http.get<Array<Session>>(`${this.sessionUrl}/list/follow-up`);
   }
 
-  getSessionByDate(dateTimeString: string): Observable<Array<Session>> {
-    return this.http.get<Array<Session>>(`${this.sessionUrl}/list/by-date`, {params: {dateTimeString: dateTimeString}});
+  getSessionByDate(timeRange: any): Observable<Array<Session>> {
+    return this.http.post<Array<Session>>(`${this.sessionUrl}/list/by-date`, timeRange);
   }
 
   getSessionDetails(sessionID: number): Observable<Session> {
@@ -238,34 +254,6 @@ export class APIService {
 
   updateSessionRemarks(notesID: number, notes: Notes): Observable<Notes> {
     return this.http.put<Notes>(`${this.sessionUrl}/remarks/update/${notesID}`, notes);
-  }
-
-  getComplaintsSuggestions(queryString: string): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/complaints/suggestions`, {params: {queryString: queryString}});
-  }
-
-  getPhysicalSuggestions(queryString: string): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/phyc-exams/suggestions`, {params: {queryString: queryString}});
-  }
-
-  getComorbiditiesSuggestions(queryString: string): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/comorbidities/suggestions`, {params: {queryString: queryString}});
-  }
-
-  getInvestigationsRequestSuggestions(): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/investigations/request/suggestions`);
-  }
-
-  getInvestigationsResultsSuggestions(): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/investigations/results/suggestions`);
-  }
-
-  getDiagnosisSuggestions(queryString: string): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/diagnosis/suggestions`, {params: {queryString: queryString}});
-  }
-
-  getTreatmentSuggestions(queryString: string): Observable<any> {
-    return this.http.get(`${this.sessionUrl}/treatment/suggestions`, {params: {queryString: queryString}});
   }
 
   getRemarksSuggestions(queryString: string): Observable<any> {

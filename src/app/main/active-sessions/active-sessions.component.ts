@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { APIService } from '../../services/api/api.service';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { Session } from '../../models/session';
+import { Patient } from 'src/app/models/patient';
 
 @Component({
   selector: 'app-active-sessions',
@@ -18,6 +19,7 @@ export class ActiveSessionsComponent implements OnInit, OnDestroy {
   is_filtering = false;
   poll: any;
   currentPaginationPage: number;
+  dateToday = new Date();
 
   constructor(
     private router: Router,
@@ -63,10 +65,8 @@ export class ActiveSessionsComponent implements OnInit, OnDestroy {
       for (const session of this.mainSessionsList) {
         const firstName = session.patient.firstName.toLowerCase();
         const regNo = session.patient.patientRegistrationNumber;
-        const middleName = session.patient.middleName.toLowerCase();
-        const surname = session.patient.surname.toLowerCase();
-        if (surname.includes(searchTermLower)  ||
-            firstName.includes(searchTermLower) || middleName.includes(searchTermLower) || regNo.includes(searchTermLower)) {
+        const lastName = session.patient.lastName.toLowerCase();
+        if (firstName.includes(searchTermLower) || lastName.includes(searchTermLower) || regNo.includes(searchTermLower)) {
               newSessionList.push(session);
         }
       }
@@ -94,11 +94,11 @@ export class ActiveSessionsComponent implements OnInit, OnDestroy {
     return itemCount;
   }
 
-
-  navToSessionDetails(session: Session) {
-    this.router.navigate(['../session'], {
+  navToSessionSumarry(session: Session) {
+    this.router.navigate(['../patient-details'], {
       queryParams: {
-        sessionID: session.id
+        patientID: session.patient.id,
+        sessionID: session.id,
       },
       relativeTo: this.route
     });

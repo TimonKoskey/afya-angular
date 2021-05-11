@@ -1,0 +1,59 @@
+#test-results input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee;
+}
+
+.no-outline:focus {
+    outline: none;
+}
+
+#test-results .form-group {
+    padding: 10px 5px;
+}
+
+#test-results .deleteInvestigation {
+    padding: 2px 10px;
+    cursor: pointer;
+    background-color: #e4cb80;
+    color: #da4856;
+    border-radius: 10px;
+    float: right;
+}
+
+#test-results .saveInvestigationResults {
+    padding: 2px 10px;
+    margin: 5px 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #f8f9fa;
+    border-radius: 10px;
+    float: right;
+}
+
+#test-results .cancelEdit {
+    padding: 2px 10px;
+    margin: 5px 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #f8f9fa;
+    border-radius: 10px;
+    float: left;
+}
+
+#test-results .editInvestigationResults {
+    padding: 0px 10px;
+    margin: 2px 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #f8f9fa;
+    border-radius: 10px;
+    float: right;
+}
+
+.table td, .table th {
+    /* padding: .3rem; */
+    cursor: pointer;
+}

@@ -39,6 +39,10 @@ export class AuthService {
       return this.http.get<User>(`${this.userUrl}/details`);
   }
 
+  getUser(userID: number) {
+    return this.http.get<User>(`${this.userUrl}/user/details/${userID}`);
+  }
+
   removeDataFromSessionStorage() {
       return this.persistence.removeAll(StorageType.SESSION);
   }

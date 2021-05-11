@@ -1,0 +1,50 @@
+<div class="users-list">
+    <!-- <ngx-spinner></ngx-spinner> -->
+    <div class="card">
+        <div class="card-body page-content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header">
+                        <h4 class="page-title">Registered Users</h4>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive" *ngIf="recordsAvailable === true">
+                        <table class="table table-sm">
+                            <thead class="table-info">
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th></th>
+                                    <!-- <th>ID No</th>
+                                    <th>Gender</th>
+                                    <th>Age</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of users; let i = index" class="table-entry">
+                                    <td>{{(i+1)}}</td>
+                                    <td>{{user.user.first_name}} {{user.user.last_name}}</td>
+                                    <td>
+                                        <span *ngIf="user.is_blocked === false" (click)="blockUser(user)"
+                                        class="badge badge-pill badge-danger">Block User</span>
+                                        <span *ngIf="user.is_blocked === true" (click)="unblockUser(user)"
+                                        class="badge badge-pill badge-success">Unblock User</span>
+                                    </td>
+                                    <!-- <td>{{user.identificationNumber}}</td>
+                                    <td>{{user.gender}}</td>
+                                    <td>{{user.age}}</td> -->
+                                </tr>  
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="empty-list-feedback" *ngIf="recordsAvailable === false">
+                        <h5>No records available.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

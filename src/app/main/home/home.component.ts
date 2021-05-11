@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   navToPatientRecords() {
-    this.router.navigate(['../patient-records'], { relativeTo: this.route });
+    this.router.navigate(['../patients/list'], { relativeTo: this.route });
   }
 
   navToPatientRegistration() {
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   navToSysAdmin() {
-    this.router.navigate(['../system-administration'], { relativeTo: this.route });
+    this.router.navigate(['../admin'], { relativeTo: this.route });
   }
 
 }
