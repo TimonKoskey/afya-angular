@@ -7,12 +7,16 @@ import { isDevMode } from '@angular/core';
   providedIn: 'root'
 })
 export class AdminAPIService {
-  userUrl = `http://127.0.0.1:8000/users`;
+  userUrl = `https://backend.ngoitsihosp.co.ke/users`;
   userDetails: any;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    if(isDevMode()) {
+      this.userUrl = `http://127.0.0.1:8000/users`;
+    }
+  }
 
   getUserData(): Observable<any> {
     return this.http.get<any>(`${this.userUrl}/list/users`);

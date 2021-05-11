@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PersistenceService, StorageType } from 'angular-persistence';
 import { Observable, throwError } from 'rxjs';
@@ -15,8 +15,8 @@ import { Investigations } from '../models/investigation';
 })
 export class SessionAPIService {
 
-  patientBaseUrl = `http://127.0.0.1:8000/patients`;
-  sessionBaseUrl = `http://127.0.0.1:8000/visits`;
+  patientBaseUrl = `https://backend.ngoitsihosp.co.ke/patients`;
+  sessionBaseUrl = `https://backend.ngoitsihosp.co.ke/visits`;
 
   // private sessions = new BehaviorSubject<Array<Session>>(null);
   // session$ = this.sessions.asObservable();
@@ -24,7 +24,12 @@ export class SessionAPIService {
   constructor(
     private http: HttpClient,
     private persistence: PersistenceService
-  ) { }
+  ) {
+    if(isDevMode()) {
+      this.patientBaseUrl = `http://127.0.0.1:8000/patients`;
+      this.sessionBaseUrl = `http://127.0.0.1:8000/visits`;
+    }
+  }
 
   setPatientToLS(patient: Patient) {
     this.persistence.set('patient', patient, { type: StorageType.SESSION });
