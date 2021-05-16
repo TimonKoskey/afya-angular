@@ -38,8 +38,10 @@ export class RetrieveSessionComponent implements OnInit {
   ngOnInit(): void {
     this.retrievedSessions = this.apiservice.getSessionsFromLS();
 
-    if (this.retrievedSessions.length > 0) {
-      this.recordsAvailable = true;
+    if (this.retrievedSessions) {
+      if (this.retrievedSessions.length > 0) {
+        this.recordsAvailable = true;
+      }
     }
     this.minDate();
   }
