@@ -6,10 +6,10 @@
             </div>
             <div class="section-content">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-lg-8">
                         <div id="data-input">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" aria-describedby="basic-addon2"
+                                <input type="text" class="form-control notes-input" aria-describedby="basic-addon2"
                                     [(ngModel)]="notesEntry" (keyup.enter)="enterNotesInput()" [typeahead]="suggestions"
                                     [isAnimated]="true">
                                 <div class="input-group-append">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-12">
                         <div id="notes-section" *ngIf="notesArray?.length > 0">
 
                             <div class="row">

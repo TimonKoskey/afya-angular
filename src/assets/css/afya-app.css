@@ -714,14 +714,17 @@ a.previous:hover {
 }
 
 .section-header {
-  border-bottom: 2px solid #17a2b8;
+  /* border-bottom: 2px solid #6c757d; */
+  background-color: #26903e;
+  color: #f8f9fa;
+  padding: 0px 30px;
   margin-bottom: 10px;
 }
 
 .section-header .section-title{
   font-size: 1.3em;
   font-weight: 300;
-  color: #17a2b8;
+  text-transform: uppercase;
 }
 
 .section-content {
@@ -801,5 +804,9 @@ a.previous:hover {
 
 .btn.btn-default.btn-print-action:hover {
   background-color: white;
+}
+
+.form-control.notes-input {
+  border: 2px solid #17a2b8;
 }
 

@@ -1,6 +1,7 @@
-#session-page-main-section-top {
-    border-bottom: 2px solid #0831430a;
-    margin-bottom: 15px;
+#patient-information {
+    background-color: #eef5fd;
+    padding: 20px 30px;
+    margin-bottom: 2px;
 }
 
 #edit-patient-details-section #edit-patient-details-link {
