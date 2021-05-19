@@ -256,11 +256,51 @@
                         <h6 class="main-page-action-bar-title">General Actions</h6>
                         <ul class="main-page-action-list">
                             <li class="main-page-action-list-item" *ngIf="session?.status !== 'Active'" (click)="startNewSession()">Start Session</li>
-                            <li class="main-page-action-list-item">Merge Sessions</li>
-                            <li class="main-page-action-list-item">Delete Patient</li>
+                            <!-- <li class="main-page-action-list-item">Merge Sessions</li> -->
+                            <li class="main-page-action-list-item" (click)="open(content)">Schedule Appointment</li>
+                            <li class="main-page-action-list-item" (click)="deletePatient(deleteContentWarning)" *ngIf="user.is_superuser">Delete Patient</li>
                         </ul>
                     </div>
                 </div>
+
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Appointment Scheduling</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="dateOfBirth">Select Date</label>
+                                <div class="input-group">
+                                    <ngb-datepicker (dateSelect)="onDateSelect($event)" [minDate]="minFollowUpDate">
+                                    </ngb-datepicker>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+                    </div>
+                </ng-template>
+
+                <ng-template #deleteContentWarning let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title" style="color: red;"> DELETE PATIENT !</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Are you sure you want to delete this patient? This action is NOT reversable</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="modal.close()">DELETE</button>
+                    </div>
+                </ng-template>
+
             </div>
         </div>
     </div>

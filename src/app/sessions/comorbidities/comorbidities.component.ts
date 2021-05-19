@@ -18,6 +18,7 @@ export class ComorbiditiesComponent implements OnInit {
   sessionID: number;
 
   suggestions = [];
+  actionIndex : number;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,31 +63,40 @@ export class ComorbiditiesComponent implements OnInit {
 
   }
 
-  createSessionComorbiditiesNotes(notes: Notes) {
+  createSessionComorbiditiesNotes(note: Notes) {
+    this.notesArray.push(note);
+    this.actionIndex = this.notesArray.indexOf(note);
 
-    this.sessionAPIService.createSessionComorbidities(this.sessionID, notes).subscribe( results => {
-
-      this.notesArray.push(results);
-      this.comorbiditiesNotesAvailable = true;
+    this.sessionAPIService.createSessionComorbidities(this.sessionID, note).subscribe( results => {
+        note.id = results.id;
+        this.actionIndex = undefined;
 
     }, error => {
-
       console.log( error );
-
+      this.notesArray.splice(this.actionIndex, 1);
+      this.actionIndex = undefined;
     } );
 
   }
 
   delete(note: Notes, index: number) {
-    this.sessionAPIService.deleteSessionComorbidities(note.id).subscribe(results => {
+    this.actionIndex = index;
+
+    this.sessionAPIService.deleteSessionComorbidities(note.id).subscribe(() => {
+      this.actionIndex = undefined;
       if (index > -1) {
         this.notesArray.splice(index, 1);
       }
 
     }, error => {
+      this.actionIndex = undefined;
       console.log(error);
     });
 
+  }
+
+  typeaheadSelect(event: any) {
+    this.enterNotesInput();
   }
 
 }

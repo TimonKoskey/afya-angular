@@ -79,7 +79,7 @@ export class EditPatientDetailsComponent implements OnInit {
     if (this.user.is_superuser) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
         this.sessionAPIService.deletePatientDetails(this.patient.id).subscribe(() => {
-          this.router.navigate(['../patient-records'], { relativeTo: this.route });
+          this.router.navigate(['../patients/list'], { relativeTo: this.route });
         }, error => {
           this.spinner.hide();
           console.error(error);

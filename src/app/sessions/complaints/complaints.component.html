@@ -11,7 +11,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control notes-input" placeholder="i.e Headache ...."
                                     aria-describedby="basic-addon2" [(ngModel)]="notesEntry" (keyup.enter)="enterNotesInput()"
-                                    [typeahead]="suggestions" [isAnimated]="true" autocomplete="off">
+                                    [typeahead]="suggestions" [isAnimated]="true" autocomplete="off" (typeaheadOnSelect)="typeaheadSelect($event)">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" (click)="enterNotesInput()"><span
                                             class="fa fa-plus" aria-hidden="true"></span> Enter </button>
@@ -24,13 +24,22 @@
         
                             <div class="row">
                                 <div class="col-lg-4 col-md-6" *ngFor="let note of notesArray; let i = index">
+
                                     <div class="notes-date-section">
-                                        <div class="notes-data">
-                                            <span><i>{{note.entry}}</i></span>
+
+                                        <div *ngIf="actionIndex !== i">
+                                            <div class="notes-data">
+                                                <span><i>{{note.entry}}</i></span>
+                                            </div>
+                                            <div class="delete-data">
+                                                <span (click)="delete(note, i)">delete</span>
+                                            </div>
                                         </div>
-                                        <div class="delete-data">
-                                            <span (click)="delete(note, i)">delete</span>
+
+                                        <div style="float: center;" *ngIf="actionIndex === i">
+                                            <mat-spinner diameter="30"></mat-spinner>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

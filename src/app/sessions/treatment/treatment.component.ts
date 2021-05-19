@@ -18,6 +18,7 @@ export class TreatmentComponent implements OnInit {
   sessionID: number;
 
   suggestions = [];
+  actionIndex : number;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,31 +63,40 @@ export class TreatmentComponent implements OnInit {
 
   }
 
-  createSessionTreatmentNotes(notes: Notes) {
+  createSessionTreatmentNotes(note: Notes) {
+    this.notesArray.push(note);
+    this.actionIndex = this.notesArray.indexOf(note);
 
-    this.sessionAPIService.createSessionTreatment(this.sessionID, notes).subscribe( results => {
-
-      this.notesArray.push(results);
-      this.treatmentNotesAvailable = true;
+    this.sessionAPIService.createSessionTreatment(this.sessionID, note).subscribe( results => {
+      note.id = results.id;
+      this.actionIndex = undefined;
 
     }, error => {
-
       console.log( error );
-
+      this.notesArray.splice(this.actionIndex, 1);
+      this.actionIndex = undefined;
     } );
 
   }
 
   delete(note: Notes, index: number) {
-    this.sessionAPIService.deleteSessionTreatment(note.id).subscribe(results => {
+    this.actionIndex = index;
+
+    this.sessionAPIService.deleteSessionTreatment(note.id).subscribe(() => {
+      this.actionIndex = undefined;
       if (index > -1) {
         this.notesArray.splice(index, 1);
       }
 
     }, error => {
+      this.actionIndex = undefined;
       console.log(error);
     });
 
+  }
+
+  typeaheadSelect(event: any) {
+    this.enterNotesInput();
   }
 
 }

@@ -19,6 +19,7 @@ export class ComplaintsComponent implements OnInit {
   sessionID: number;
 
   suggestions = [];
+  actionIndex : number;
 
   constructor(
     private router: Router,
@@ -65,29 +66,46 @@ export class ComplaintsComponent implements OnInit {
   }
 
   createSessionComplaintsNotes(note: Notes) {
+    this.notesArray.push(note);
+    this.actionIndex = this.notesArray.indexOf(note);
 
-    this.sessionAPIService.createSessionComplaints(this.sessionID, note).subscribe(results => {
-      this.notesArray.push(results);
-      this.complaintsNotesAvailable = true;
+    setTimeout(() => {
 
-    }, error => {
+      this.sessionAPIService.createSessionComplaints(this.sessionID, note).subscribe(results => {
+        note.id = results.id;
+        this.actionIndex = undefined;
+      }, error => {
+        console.log(error);
+        this.notesArray.splice(this.actionIndex, 1);
+        this.actionIndex = undefined;
+      });
 
-      console.log(error);
-
-    });
+    }, 3000);
 
   }
 
   delete(note: Notes, index: number) {
-    this.sessionAPIService.deleteSessionComplaints(note.id).subscribe(results => {
-      if (index > -1) {
-        this.notesArray.splice(index, 1);
-      }
+    this.actionIndex = index;
 
-    }, error => {
-      console.log(error);
-    });
+    setTimeout(() => {
 
+      this.sessionAPIService.deleteSessionComplaints(note.id).subscribe(results => {
+        this.actionIndex = undefined;
+        if (index > -1) {
+          this.notesArray.splice(index, 1);
+        }
+  
+      }, error => {
+        this.actionIndex = undefined;
+        console.log(error);
+      });
+
+    }, 3000);
+
+  }
+
+  typeaheadSelect(event: any) {
+    this.enterNotesInput();
   }
 
 }

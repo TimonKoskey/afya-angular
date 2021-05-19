@@ -1,4 +1,5 @@
 <div id="physical-exam-section">
+    <ngx-spinner></ngx-spinner>
     <div class="card">
         <div class="card-body">
             <div class="section-header">
@@ -11,22 +12,23 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control notes-input" aria-describedby="basic-addon2"
                                     [formControl]="investigationTestForm" (keyup.enter)="enterTestInput()"
-                                    [typeahead]="testSuggestions" [isAnimated]="true">
+                                    [typeahead]="testSuggestions" [isAnimated]="true" (typeaheadOnSelect)="typeaheadTestSelect($event)">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" (click)="enterTestInput()"><span
-                                            class="fa fa-plus" aria-hidden="true"></span> Enter </button>
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        (click)="enterTestInput()"><span class="fa fa-plus" aria-hidden="true"></span>
+                                        Enter </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-12">
-        
+
                         <div class="row">
                             <!-- <div class="col-12"> -->
-        
+
                             <div class="col-lg-12">
                                 <div id="notes-section" *ngIf="newInvestigations?.length > 0">
-        
+
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6"
                                             *ngFor="let investigation of newInvestigations; let i = index">
@@ -40,19 +42,18 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-left" (click)="saveTestList()" style="margin-top: 20px;"><i
-                                                    class="fa fa-check" aria-hidden="true"></i>SAVE</button>
+                                            <button class="btn btn-left" (click)="saveTestList()"
+                                                style="margin-top: 20px;"><i class="fa fa-check"
+                                                    aria-hidden="true"></i>SAVE</button>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class="col-12">
                                 <div id="test-results" *ngIf="investigations && investigations?.length > 0">
-        
-                                    <h5 style="text-align: center">Results</h5>
-        
+                                    <!-- <h5 style="text-align: center">Results</h5> -->
                                     <div [formGroup]="investigationResultsForms">
                                         <div formArrayName="results">
                                             <div class="table-responsive">
@@ -70,32 +71,38 @@
                                                                 <span>{{investigations[i].test}}</span>
                                                             </td>
                                                             <td>
-                                                                <div
-                                                                    *ngIf="investigations[i].results === null || investigations[i].results === '' || controlIndex === i; else displayResults">
-                                                                    <input class="form-control no-outline" type="text"
-                                                                        [formControlName]="i"
-                                                                        (keyup.enter)="saveInvestigationResults(i)"
-                                                                        (keyup.enter)="enterTestInput()"
-                                                                        [typeahead]="resultsSuggestions" [isAnimated]="true">
-                                                                    <span class="cancelEdit" (click)="cancelEdit()"
-                                                                        *ngIf="editing && controlIndex === i">Cancel</span>
-                                                                    <span class="saveInvestigationResults"
-                                                                        (click)="saveInvestigationResults(i)">Save</span>
-                                                                </div>
-        
-                                                                <ng-template #displayResults>
-                                                                    <div>
-                                                                        <span>{{investigations[i].results}}</span>
-                                                                        <span class="editInvestigationResults"
-                                                                            (click)="editInvestigationResults(i)">Edit</span>
+                                                                <div *ngIf="actionIndex !== i">
+                                                                    <div
+                                                                        *ngIf="investigations[i].results === null || investigations[i].results === '' || controlIndex === i; else displayResults">
+                                                                        <input class="form-control no-outline"
+                                                                            type="text" [formControlName]="i"
+                                                                            (keyup.enter)="saveInvestigationResults(i)"
+                                                                            [typeahead]="resultsSuggestions"
+                                                                            [isAnimated]="true" (typeaheadOnSelect)="typeaheadResultsSelect($event,i)">
+                                                                        <span class="cancelEdit" (click)="cancelEdit()"
+                                                                            *ngIf="editing && controlIndex === i">Cancel</span>
+                                                                        <span class="saveInvestigationResults"
+                                                                            (click)="saveInvestigationResults(i)">Save</span>
                                                                     </div>
-                                                                </ng-template>
-        
+
+                                                                    <ng-template #displayResults>
+                                                                        <div>
+                                                                            <span>{{investigations[i].results}}</span>
+                                                                            <span class="editInvestigationResults"
+                                                                                (click)="editInvestigationResults(i)">Edit</span>
+                                                                        </div>
+                                                                    </ng-template>
+                                                                </div>
+
+                                                                <div *ngIf="actionIndex === i">
+                                                                    <mat-spinner diameter="30"></mat-spinner>
+                                                                </div>
+
                                                             </td>
-        
+
                                                             <td>
                                                                 <span class="deleteInvestigation"
-                                                                    (click)="deleteInvestigation(investigations[i])">Delete</span>
+                                                                    (click)="deleteInvestigation(investigations[i], i)">Delete</span>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -103,10 +110,10 @@
                                             </div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import {NgxPrintModule} from 'ngx-print';
+import { NgxPrintModule } from 'ngx-print';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -56,7 +57,8 @@ import { ChargeReceiptComponent } from './charge-receipt/charge-receipt.componen
     TypeaheadModule.forRoot(),
     NgxSpinnerModule,
     SharedModule,
-    NgxPrintModule
+    NgxPrintModule,
+    MatProgressSpinnerModule
   ],
 
   providers: [ SessionAPIService ]

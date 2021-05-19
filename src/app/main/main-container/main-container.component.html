@@ -1,7 +1,7 @@
 <div id="main-container-component">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 p-0">
                 <div class="sidebar-nav">
                     <ul class="no-bullets">
                         <li class="nav-item" routerLink="/account/home" routerLinkActive="active">
@@ -20,14 +20,7 @@
                             <i class="fa fa-user-circle"></i>
                             <span>Active Sessions</span>
                         </li>
-                        <!-- <li class="nav-item" routerLink="/account/follow-up-sessions" routerLinkActive="active">
-                            <i class="fa fa-calendar"></i>
-                            <span>Follow Up Sessions</span>
-                        </li>
-                        <li class="nav-item" routerLink="/account/lab-results" routerLinkActive="active">
-                            <i class="fa fa-flask"></i>
-                            <span>Investigation Results</span>
-                        </li> -->
+
                         <li class="nav-item" routerLink="/account/retrieve-session" routerLinkActive="active">
                             <i class="fa fa-archive"></i>
                             <span>Retrieve Session</span>
@@ -39,7 +32,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 p-0">
                 <router-outlet></router-outlet>
             </div>
         </div>

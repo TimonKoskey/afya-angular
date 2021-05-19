@@ -15,8 +15,12 @@ import { Session } from '../../models/session'
 })
 export class PatientDetailsComponent implements OnInit {
 
+  user: any;
   session: Session;
   patient: Patient;
+
+  minFollowUpDate: any;
+  appointmentDateEvent: any;
 
   constructor(
     private router: Router,
@@ -33,7 +37,8 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.user = this.apiservice.getUser();
+    this.minDate();
     this.route.queryParams.subscribe(params => {
       const patientID = params.patientID;
       this.sessionAPIService.getPatientDetails(patientID).subscribe(results => {
@@ -102,6 +107,58 @@ export class PatientDetailsComponent implements OnInit {
       },
       relativeTo: this.route
     });
+  }
+
+  deletePatient(content: any) {
+    if (this.user.is_superuser) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
+        this.sessionAPIService.deletePatientDetails(this.patient.id).subscribe(() => {
+          this.router.navigate(['../patients/list'], { relativeTo: this.route });
+        }, error => {
+          this.spinner.hide();
+          console.error(error);
+        })
+      }, () => {});
+    }
+  }
+
+  onDateSelect(event: any) {
+    this.appointmentDateEvent = event;
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
+      this.scheduleAppoint();
+    }, () => {});
+  }
+
+  scheduleAppoint() {
+    if (this.appointmentDateEvent !== undefined) {
+      const appointmentData = {
+        dateString: new Date(this.appointmentDateEvent.year, this.appointmentDateEvent.month - 1, this.appointmentDateEvent.day).toUTCString()
+      }
+
+      console.log(appointmentData)
+
+      this.apiservice.scheduleAppointments(this.patient.id, appointmentData).subscribe((results) => {
+        console.log(results)
+      }, (error) => {
+        console.error(error);  
+      })
+    }
+  }
+
+  minDate() {
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const currentMonth = (date.getMonth() + 1);
+    const dateToday = date.getDate();
+
+    this.minFollowUpDate = {
+      year: currentYear,
+      month: currentMonth,
+      day: dateToday
+    };
   }
 
 }

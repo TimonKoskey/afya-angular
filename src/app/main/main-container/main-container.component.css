@@ -7,7 +7,7 @@ ul.no-bullets {
 ul.no-bullets li{
     cursor: pointer;
     background-color: red;
-    padding: 5px 10px;
+    padding: 10px 10px;
     margin: 5px 0px;
     color: whitesmoke;
 }
@@ -21,4 +21,9 @@ ul.no-bullets li{
     border-radius: 4px;
     background-color: #ca3f2cf2;
     color: #e9ecef;
+}
+
+
+.sidebar-nav {
+    margin-right: 5px;
 }

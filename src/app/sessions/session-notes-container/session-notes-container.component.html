@@ -18,6 +18,18 @@
                     <!-- <li class="header-menu">
                         <span>Dashboard</span>
                     </li> -->
+
+                    <li>
+                        <a routerLink="../session-data/payments" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Charges</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a routerLink="../session-data/vitals" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
+                            <span>Vitals</span>
+                        </a>
+                    </li>
     
                     <li>
                         <a routerLink="../session-data/complaints" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
@@ -52,18 +64,6 @@
                     <li>
                         <a routerLink="../session-data/treatment" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
                             <span>Treatment</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a routerLink="../session-data/vitals" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
-                            <span>Vitals</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a routerLink="../session-data/payments" routerLinkActive="active" [queryParams]="{'patientID':patientID, 'sessionID':sessionID}">
-                            <span>Charges</span>
                         </a>
                     </li>
 

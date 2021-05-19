@@ -717,7 +717,7 @@ a.previous:hover {
   /* border-bottom: 2px solid #6c757d; */
   background-color: #26903e;
   color: #f8f9fa;
-  padding: 0px 30px;
+  padding: 3px 30px;
   margin-bottom: 10px;
 }
 
@@ -808,5 +808,13 @@ a.previous:hover {
 
 .form-control.notes-input {
   border: 2px solid #17a2b8;
+}
+
+.notes-date-section {
+  margin-top: 8px;
+}
+
+.h5, h5 {
+  font-size: 1.25rem !important;
 }
 

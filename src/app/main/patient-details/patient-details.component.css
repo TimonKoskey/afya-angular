@@ -64,7 +64,7 @@ span.badge {
 .main-page-action-bar-title {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 1.0em;
+    font-size: 1.1em;
     border-bottom: 1px solid;
 }
 
@@ -81,8 +81,8 @@ span.badge {
     cursor: pointer;
     padding: 2px 10px;
     background-color: #0f3c3c;
-    margin: 2px 0px;
-    /* border: 1px solid whitesmoke; */
+    margin: 3px 0px;
+    padding: 10px 10px;
 }
 
 .section {

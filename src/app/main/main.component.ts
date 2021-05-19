@@ -28,6 +28,7 @@ export class MainComponent implements OnInit, OnDestroy {
         }
       }, error => {
         console.error(error);
+        this.logout();
       });
     }, 5000);
   }

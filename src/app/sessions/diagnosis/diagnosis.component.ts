@@ -18,6 +18,7 @@ export class DiagnosisComponent implements OnInit {
   sessionID: number;
 
   suggestions = [];
+  actionIndex : number;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,31 +63,41 @@ export class DiagnosisComponent implements OnInit {
 
   }
 
-  createSessionDiagnosisNotes(notes: Notes) {
+  createSessionDiagnosisNotes(note: Notes) {
+    this.notesArray.push(note);
+    this.actionIndex = this.notesArray.indexOf(note);
 
-    this.sessionAPIService.createSessionDiagnosis(this.sessionID, notes).subscribe( results => {
+    this.sessionAPIService.createSessionDiagnosis(this.sessionID, note).subscribe( results => {
 
-      this.notesArray.push(results);
-      this.diagnosisNotesAvailable = true;
+      note.id = results.id;
+      this.actionIndex = undefined;
 
     }, error => {
-
       console.log( error );
-
+      this.notesArray.splice(this.actionIndex, 1);
+      this.actionIndex = undefined;
     } );
 
   }
 
   delete(note: Notes, index: number) {
-    this.sessionAPIService.deleteSessionDiagnosis(note.id).subscribe(results => {
+    this.actionIndex = index;
+
+    this.sessionAPIService.deleteSessionDiagnosis(note.id).subscribe(() => {
+      this.actionIndex = undefined;
       if (index > -1) {
         this.notesArray.splice(index, 1);
       }
 
     }, error => {
+      this.actionIndex = undefined;
       console.log(error);
     });
 
+  }
+
+  typeaheadSelect(event: any) {
+    this.enterNotesInput();
   }
 
 }

@@ -284,4 +284,8 @@ export class APIService {
     return this.http.get<Array<Session>>(`${this.sessionUrl}/patient/visits/suspended/${patientID}`);
   }
 
+  scheduleAppointments(patientID: number, appointmentData: any): Observable<any> {
+    return this.http.post(`${this.sessionUrl}/appointment/create/${patientID}`, appointmentData);
+  }
+
 }
