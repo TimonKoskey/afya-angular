@@ -207,4 +207,20 @@ export class SessionAPIService {
     return this.http.delete(`${this.patientBaseUrl}/patient/details/${patientID}`);
   }
 
+  createSessionPrescription(sessionID: number, notes: Notes): Observable<Session> {
+    return this.http.post<Session>(`${this.sessionBaseUrl}/prescription/create/${sessionID}`, notes);
+  }
+
+  getSessionPrescription(sessionID: number): Observable<Array<Notes>>{
+    return this.http.get<Array<Notes>>(`${this.sessionBaseUrl}/prescription/list/${sessionID}`);
+  }
+
+  deleteSessionPrescription(notesID: number) {
+    return this.http.delete(`${this.sessionBaseUrl}/prescription/delete/${notesID}`);
+  }
+
+  getPrescriptionSuggestions(): Observable<any> {
+    return this.http.get(`${this.sessionBaseUrl}/prescription/suggestions`);
+  }
+
 }

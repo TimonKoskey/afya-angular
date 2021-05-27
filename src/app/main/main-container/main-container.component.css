@@ -23,6 +23,10 @@ ul.no-bullets li{
     color: #e9ecef;
 }
 
+ul.no-bullets li.active{
+    color: red;
+    background-color: #eef5fd;
+}
 
 .sidebar-nav {
     margin-right: 5px;

@@ -288,4 +288,8 @@ export class APIService {
     return this.http.post(`${this.sessionUrl}/appointment/create/${patientID}`, appointmentData);
   }
 
+  getPatientHistory(patientID: number): Observable<Array<Session>> {
+    return this.http.get<Array<Session>>(`${this.sessionUrl}/list/of-patient/${patientID}`);
+  }
+
 }

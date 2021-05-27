@@ -1,3 +1,11 @@
 .notes-date-section {
     margin-top: 5px;
 }
+
+.prescription-toggle-button {
+    margin: 15px;
+}
+
+.display-prescription {
+    display: block;
+}

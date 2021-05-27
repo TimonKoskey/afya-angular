@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { SessionAPIService } from '../session-api.service';
 import { Patient } from '../../models/patient';
 import { Session } from '../../models/session';
@@ -18,6 +19,7 @@ export class SessionComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private spinner: NgxSpinnerService,
     private sessionAPISerive: SessionAPIService
   ) { }
 
@@ -27,9 +29,19 @@ export class SessionComponent implements OnInit {
       this.patientID = params.patientID;
       this.sessionID = params.sessionID;
 
-      this.sessionAPISerive.getSessionDetails(this.sessionID).subscribe(results => {
-        this.session = results
-      });
+      if (this.sessionID) {
+        this.spinner.show();
+        this.sessionAPISerive.getSessionDetails(this.sessionID).subscribe(results => {
+          this.spinner.hide();
+          this.session = results
+        }, (error) => {
+          this.spinner.hide();
+          console.error(error);
+          
+        });
+      } else {
+        this.router.navigate(['/account/patients/list']);
+      }
 
     });
 

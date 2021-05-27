@@ -18,6 +18,9 @@ export class PatientDetailsComponent implements OnInit {
   user: any;
   session: Session;
   patient: Patient;
+  patientID: number;
+
+  patientHistory: Array<Session> = [];
 
   minFollowUpDate: any;
   appointmentDateEvent: any;
@@ -40,15 +43,45 @@ export class PatientDetailsComponent implements OnInit {
     this.user = this.apiservice.getUser();
     this.minDate();
     this.route.queryParams.subscribe(params => {
-      const patientID = params.patientID;
-      this.sessionAPIService.getPatientDetails(patientID).subscribe(results => {
-        this.patient = results;
-      });
-      this.apiservice.getPatientDetailsSummary(patientID).subscribe(results => {
-        this.session = results
-      })
+      this.patientID = params.patientID;
+      if (this.patientID) {
+        this.spinner.show();
+        this.getPatientCurrentData();
+        this.getPatientHistory();
+      } else {
+        this.router.navigate(['../patients/list'], { relativeTo: this.route });
+      }
     });
 
+  }
+
+  getPatientCurrentData() {
+    this.sessionAPIService.getPatientDetails(this.patientID).subscribe(results => {
+      this.patient = results;
+      this.getLastSessionData();
+    }, (error) => {
+      this.spinner.hide();
+      console.error(error);
+    });
+  }
+
+  getLastSessionData() {
+    this.apiservice.getPatientDetailsSummary(this.patientID).subscribe(results => {
+      this.spinner.hide();
+      this.session = results
+    }, (error) => {
+      this.spinner.hide();
+      console.error(error);
+    });
+  }
+
+  getPatientHistory() {
+    this.apiservice.getPatientHistory(this.patientID).subscribe((results) => {
+      this.patientHistory = results.reverse();
+      console.log(this.patientHistory);
+    }, (error) => {
+      console.error(error);
+    });
   }
 
   startNewSession() {
@@ -159,6 +192,16 @@ export class PatientDetailsComponent implements OnInit {
       month: currentMonth,
       day: dateToday
     };
+  }
+
+  navToSessionSummary(session: Session) {
+    this.router.navigate(['../session/session-data/session-summary'], {
+      queryParams: {
+        patientID: session.patient.id,
+        sessionID: session.id,
+      },
+      relativeTo: this.route
+    });
   }
 
 }
