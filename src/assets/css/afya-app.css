@@ -818,3 +818,7 @@ a.previous:hover {
   font-size: 1.25rem !important;
 }
 
+.h6, h6 {
+  font-size: 1rem !important;
+}
+

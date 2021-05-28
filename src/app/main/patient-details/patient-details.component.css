@@ -149,9 +149,13 @@ span.badge {
     padding: 0px 0px;
 }
 
-.table td, .table th {
-    padding: .3rem;
+.table tr {
     font-size: .9em;
+    background-color: #eef5fd;
+}
+
+.table tr:hover {
+    background-color: #495057;
 }
 
 
